@@ -1,0 +1,36 @@
+body{max-width:50em;line-height:1.6;background-color:#ffffea;padding:0 }
+10px}h1,h2,h3{line-height:1.2}
+a:hover, a:hover > * { background-color:#000;color:#fff;text-decoration:none }
+a:before { content:"[" }
+a:after { content:"]" }
+h1 {font-size: x-large}
+h2 {font-size: large}
+a { text-decoration:none; color:#000}
+pre { white-space: pre-wrap; font-family: serif; font-size:16px}
+h1 {
+    line-height: 1.2;
+}
+@media print {
+    body {
+        max-width: none;
+    }
+}
+table tr td {
+    line-height: 1.25em;
+}
+tt a {
+    background: #ddddea;
+    text-decoration: none;
+    color: blue;
+}
+.container {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+}
+.container > * {
+    margin: 1em;
+}
+
+
+

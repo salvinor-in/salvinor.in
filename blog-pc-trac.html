@@ -1,0 +1,59 @@
+<!|DOCTYPE html>
+<html lang="en">
+<head>
+<link rel=stylesheet href="./static/css/main.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quick guide to CST/Xkeys PC-trac/O-trac/Kidtrac</title>
+<body>
+<article>
+
+<h1>Quick guide to CST/Xkeys PC-trac/O-trac/Kidtrac</h1>
+<p>O-trac and PC-trac seem to be the same trackball model made by different
+companies due to buyout. It is a classic trackball model without a
+scrolling functionality.</p>
+<p>There are a couple varieties of this trackball, described in detail
+<a href="https://www.ergocanada.com/detailed_specification_pages/clearly_superior_technologies_pc_trac.html#models">here</a>. I have CST1150 model, I would be thankful for inputs from people
+with Pro models to make this guide more comprehensive.</p>
+<p>One can find <a href="http://web.archive.org/web/20120710080618/http://clearlysuperiortech.com/files/file____Y__CST_cd1_index.pdf">manuals here</a>, although they do not provide too much
+useful data.</p>
+<p>This is a short guide to using and setting up this trackball.</p>
+<h2>Middle click</h2>
+<p>By default, the middle click is terrible. If you click it once, it goes
+into drag-hold mode which is useless, and when you hold it for 2.5s it
+will <s>explode</s> go into scroll mode. To leave the scroll mode,
+press any other key. I bet there are people who prefer this scheme.</p>
+<p>To fix this, you need to solder to bridge two pins on the board. Then,
+you will have normal middle click and you can start using the trackball
+properly.</p>
+<p>Here is a picture of the two pins in questions. They are on the right
+side of the reset square in the bottom corner of said square.</p>
+<p><img src="./pins.jpg" alt="two pins" /></p>
+<h2>Scrolling</h2>
+<p>After you have resolved this, now you need scrolling. To get this
+functionality, you can go two ways.</p>
+<ul>
+<li>enable auto-scrolling in applications that provide it (i.e. Firefox)</li>
+<li>enable it system-wide</li>
+</ul>
+<p>To enable it system-wide, follow <a href="https://unix.stackexchange.com/questions/624655/how-to-configure-the-elecom-huge-trackball-to-scroll-with-the-ball">this guide</a>, just remember to change
+the scroll button to 2 (middle) or 3 (right). I have tested this and
+found it not useful for me, prefer per-application as this blocks moving
+the mouse while having the middle or right button pressed.</p>
+<h2>Accelaration</h2>
+<p>By default, acceleration is pretty low. For linux, install <code>xinput</code>, and then run following commands</p>
+<pre><code>xinput # to get the list of devices
+xinput set-prop 'CST CST USB UNITRAC' 'libinput Accel Speed' 1.0 # to set the accel speed, adjust the device name if it is different
+</code></pre>
+<p>Keep in mind that this only sets it for current session <strong>and</strong> currently
+plugged in devices, unplugging the device and plugging it back in will
+disable the setting. To have this set permanently either set it up in
+xorg.conf or use a script which checks if device is plugged in and then
+sets the accelaration speed to the correct one.</p>
+<p>An example of a working script (using <a href="http://eradman.com/entrproject/">entr</a>):</p>
+<pre><code>cd /dev/input/; while sleep 0.1; do echo by-id | entr -d xinput set-prop 'CST CST USB UNITRAC' 'libinput Accel Speed' 1.0 ; done
+</code></pre>
+<p>Put this one in auto-run, so it will work fine.</p>
+<a href="./index.html">take me back to index</a>
+</body>
+</html>
